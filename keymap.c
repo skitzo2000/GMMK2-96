@@ -39,9 +39,12 @@ enum custom_keycodes {
 #define MEDIA_KEY_COLORS        RGB_GOLD
 //  Skitzo2000's custom keys
 #define TO_KEY_COLORS          BLUE_RGB
+int TO_KEYS[]    = {};
 //  GMMK 2 96 Default FN layer keys and Others
 int ARROW_KEYS[] = {82, 94, 95, 96};
+int SIZE_OF_ARROW_KEYS = sizeof(ARROW_KEYS)/sizeof(int);
 int MISC_KEYS[]  = {1, 2, 3, 4, 88};
+int SIZE_OF_MISC_KEYS = sizeof(MISC_KEYS)/sizeof(int);
 int RESET_KEY    =  49;
 int RGB_KEYS[]   =  {71, 72, 73, 74, 82, 94, 95, 96};
 int MEDIA_KEYS[] =  {5, 6, 7, 8, 9, 10, 11};
@@ -224,32 +227,23 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
         case 3:  //layer 2
             //TO(Layers)
-            rgb_matrix_set_color(16, TO_KEY_COLORS);
-            rgb_matrix_set_color(17, TO_KEY_COLORS);
-            rgb_matrix_set_color(18, TO_KEY_COLORS);
+            for(int i = 0; i < 0; i++) {
+                rgb_matrix_set_color(TO_KEYS[i], TO_KEY_COLORS);
+            }
             // KC_MYCM,  KC_WHOM,  KC_CALC,  KC_MSEL, UC_M_WI
-            for(int i = 0; i < (sizeof(MISC_KEYS)-1 ); i++) {
+            for(int i = 0; i < SIZE_OF_MISC_KEYS; i++) {
                 rgb_matrix_set_color(MISC_KEYS[i], MISC_KEY_COLORS);
             }
             // Reset
-            rgb_matrix_set_color(61, RESET_KEY_COLORS);  //  KC_HOME
+            rgb_matrix_set_color(RESET_KEY, RESET_KEY_COLORS);  //  KC_HOME
             //RGBMatrix
-            rgb_matrix_set_color(45, RGB_KEY_COLORS);  // RGB_HUI
-            rgb_matrix_set_color(46, RGB_KEY_COLORS);  // RGB_HUD
-            rgb_matrix_set_color(47, RGB_KEY_COLORS);  // RGB_SPD
-            rgb_matrix_set_color(48, RGB_KEY_COLORS);  // RGB_SPI
+            for(int i = 0; i < 8; i++) {
+                rgb_matrix_set_color(RGB_KEYS[i], RGB_KEY_COLORS);
+            }
             //Media
-            rgb_matrix_set_color(49, MEDIA_KEY_COLORS);  // KC_MUTE
-            rgb_matrix_set_color(50, MEDIA_KEY_COLORS);  // KC_VOLU
-            rgb_matrix_set_color(51, MEDIA_KEY_COLORS);  // KC_VOLD
-            rgb_matrix_set_color(52, MEDIA_KEY_COLORS);  // KC_MPRV
-            rgb_matrix_set_color(53, MEDIA_KEY_COLORS);  // KC_MPLY
-            rgb_matrix_set_color(54, MEDIA_KEY_COLORS);  // KC_MNXT
-            //  Arrow Keys
-            rgb_matrix_set_color(56, ARROW_KEY_COLORS);  // RGB_VAI
-            rgb_matrix_set_color(64, ARROW_KEY_COLORS);  // RGB_RMOD
-            rgb_matrix_set_color(65, ARROW_KEY_COLORS);  // RGB_VAD
-            rgb_matrix_set_color(66, ARROW_KEY_COLORS);  // RGB_MOD
+            for(int i = 0; i < 7; i++) {
+                rgb_matrix_set_color(MEDIA_KEYS[i], MEDIA_KEY_COLORS);
+            }
             break;
         default:
         break;
