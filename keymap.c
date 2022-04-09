@@ -18,19 +18,14 @@
 
 #include "glorious_sides96.h"
 
-enum custom_keycodes {
-    PRNTSCREEN = SAFE_RANGE,
-    NAME,
-    GOOD_MORNING,
-    HAPPY_MONDAY,
-    HAPPY_FRIDAY,
-};
+#include "macros.h"
 
 //  Skitzo2000's Custom Colors
 #define ORANGE_RGB        120, 26, 0
 #define DARKORANGE_RGB    60, 13, 0
 #define BLUE_RGB          0, 26, 255
 #define DARKBLUE_RGB      0, 60, 120
+#define DARKORANGE_HSV    7, 255, 255
 //  GMMK 2 96 Default Function Layer colors
 #define ARROW_KEY_COLORS        ORANGE_RGB
 #define MISC_KEY_COLORS         RGB_YELLOW
@@ -39,57 +34,20 @@ enum custom_keycodes {
 #define MEDIA_KEY_COLORS        RGB_GOLD
 //  Skitzo2000's custom keys
 #define TO_KEY_COLORS          BLUE_RGB
-int TO_KEYS[]    = {};
+int TO_KEYS[]    = {83, 84, 97};
 //  GMMK 2 96 Default FN layer keys and Others
-int ARROW_KEYS[] = {82, 94, 95, 96};
-int SIZE_OF_ARROW_KEYS = sizeof(ARROW_KEYS)/sizeof(int);
-int MISC_KEYS[]  = {1, 2, 3, 4, 88};
-int SIZE_OF_MISC_KEYS = sizeof(MISC_KEYS)/sizeof(int);
-int RESET_KEY    =  49;
+int ARROW_KEYS[] =  {82, 94, 95, 96};
+int MISC_KEYS[]  =  {1, 2, 3, 4, 88, 58, 59, 76, 77};
 int RGB_KEYS[]   =  {71, 72, 73, 74, 82, 94, 95, 96};
 int MEDIA_KEYS[] =  {5, 6, 7, 8, 9, 10, 11};
+int RESET_KEY    =  49;
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case PRNTSCREEN:
-        if (record->event.pressed) {
-            SEND_STRING(SS_RGUI(SS_RSFT("s")));
-        } else {
-
-        }
-        break;
-    case NAME:
-        if (record->event.pressed) {
-            SEND_STRING("Paul Norton");
-        } else {
-
-        }
-        break;
-    case GOOD_MORNING:
-        if (record->event.pressed) {
-            SEND_STRING("Good Morning, ");
-        } else {
-
-        }
-        break;
-    case HAPPY_MONDAY:
-        if (record->event.pressed) {
-            SEND_STRING("Happy Monday, ");
-        } else {
-
-        }
-        break;
-    case HAPPY_FRIDAY:
-        if (record->event.pressed) {
-            SEND_STRING("Happy Friday, ");
-        } else {
-
-        }
-        break;
-    }
-    return true;
-};
-
+// Just a little clean up to get the lengths of the array's at compile time
+int SIZE_OF_ARROW_KEYS = sizeof(ARROW_KEYS)/sizeof(int);
+int SIZE_OF_MISC_KEYS = sizeof(MISC_KEYS)/sizeof(int);
+int SIZE_OF_RGB_KEYS = sizeof(RGB_KEYS)/sizeof(int);
+int SIZE_OF_MEDIA_KEYS = sizeof(MEDIA_KEYS)/sizeof(int);
+int SIZE_OF_TO_KEYS = sizeof(TO_KEYS)/sizeof(int);
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -112,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _BL: Base Layer (Default Layer)
    */
 [_BL] = LAYOUT(
-  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PSCR,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
+  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   PRNTSCREEN,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
   KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,  KC_NLCK,  KC_PSLS,  KC_PAST,  KC_PMNS,
   KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,   KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
   KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,   KC_P4,    KC_P5,    KC_P6,
@@ -120,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL,  KC_LGUI,  KC_LALT,                      KC_SPC,                                 KC_RALT,  MO(_FL),  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,    KC_PDOT),
 
 [_1L] = LAYOUT(
-  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PSCR,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
+  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   PRNTSCREEN,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
   KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,  KC_NLCK,  KC_PSLS,  KC_PAST,  KC_PMNS,
   KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,   KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
   KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,   KC_P4,    KC_P5,    KC_P6,
@@ -129,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [_2L] = LAYOUT(
-  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PSCR,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
+  KC_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   PRNTSCREEN,  KC_DEL,   KC_INS,   KC_PGUP,  KC_PGDN,
   KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,  KC_NLCK,  KC_PSLS,  KC_PAST,  KC_PMNS,
   KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,   KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
   KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,   KC_P4,    KC_P5,    KC_P6,
@@ -139,12 +97,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _FL: Function Layer
    */
 [_FL] = LAYOUT(
-    RESET,  KC_MYCM,  KC_WHOM,  KC_CALC,  KC_MSEL,  KC_MPRV,  KC_MRWD,  KC_MPLY,  KC_MSTP,  KC_MUTE,  KC_VOLU,  KC_VOLD,  _______,   _______,  _______,  _______,  _______,  _______,
+    RESET,  KC_MYCM,  KC_WHOM,  KC_CALC,  KC_MSEL,  KC_MPRV,  KC_MRWD,  KC_MPLY,  KC_MSTP,  KC_MUTE,  KC_VOLU,  KC_VOLD,  _______,   KC_PSCR,  _______,  _______,  _______,  _______,
   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,
-  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,
-  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,             _______,  _______,  _______,
-  _______,  RGB_HUI,  RGB_HUD,  RGB_SPD,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   RGB_VAI,  _______,  _______,  _______,  _______,
-	_______,  UC_M_WI,  _______,                      _______,                                _______,  _______,  _______, RGB_RMOD,   RGB_VAD,  RGB_MOD,  _______,  _______)
+  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   RESET,  _______,  _______,  _______,  _______,
+  _______,  _______,  _______,  _______,  HAPPY_FRIDAY,  GOOD_MORNING,  _______,  _______,  _______,  _______,  _______,  _______,  _______,             _______,  _______,  _______,
+  _______,  RGB_HUI,  RGB_HUD,  RGB_SPD,  RGB_SPI,  _______,  NAME,  HAPPY_MONDAY,  _______,  _______,  _______,  _______,   RGB_VAI,  TO(_1L),  TO(_2L),  _______,  _______,
+	_______,  UC_M_WI,  _______,                      _______,                                _______,  _______,  _______, RGB_RMOD,   RGB_VAD,  RGB_MOD,  TO(_BL),  _______)
 };
 
 enum LEDLAYER {
@@ -168,7 +126,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE);
     }
     else {
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE);
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_TYPING_HEATMAP);
     }
     return state;
 }
@@ -220,6 +178,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     switch(get_highest_layer(layer_state)){  // special handling per layer
         case 0:  //Layer 0
+            set_glorious_side_96('r', BLUE_RGB);
+            set_glorious_side_96('l', ORANGE_RGB);
             break;
         case 1:  //layer 1
             break;
@@ -227,7 +187,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
         case 3:  //layer 2
             //TO(Layers)
-            for(int i = 0; i < 0; i++) {
+            for(int i = 0; i < SIZE_OF_TO_KEYS; i++) {
                 rgb_matrix_set_color(TO_KEYS[i], TO_KEY_COLORS);
             }
             // KC_MYCM,  KC_WHOM,  KC_CALC,  KC_MSEL, UC_M_WI
@@ -237,11 +197,11 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             // Reset
             rgb_matrix_set_color(RESET_KEY, RESET_KEY_COLORS);  //  KC_HOME
             //RGBMatrix
-            for(int i = 0; i < 8; i++) {
+            for(int i = 0; i < SIZE_OF_RGB_KEYS; i++) {
                 rgb_matrix_set_color(RGB_KEYS[i], RGB_KEY_COLORS);
             }
             //Media
-            for(int i = 0; i < 7; i++) {
+            for(int i = 0; i < SIZE_OF_MEDIA_KEYS; i++) {
                 rgb_matrix_set_color(MEDIA_KEYS[i], MEDIA_KEY_COLORS);
             }
             break;
@@ -259,6 +219,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 void keyboard_post_init_user(void) {
   rgblight_enable_noeeprom(); // Enables RGB, without saving settings
   rgblight_set_speed(25);
+  rgblight_sethsv_noeeprom(DARKORANGE_HSV);
   set_glorious_side_96('r', BLUE_RGB);
   set_glorious_side_96('l', ORANGE_RGB);
 }
