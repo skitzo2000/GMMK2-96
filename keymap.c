@@ -173,7 +173,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
-        RGB_MATRIX_INDICATOR_SET_COLOR(30, 255, 255, 255); //capslock key
+        RGB_MATRIX_INDICATOR_SET_COLOR(54, 255, 255, 255); //capslock key
     }
 
     switch(get_highest_layer(layer_state)){  // special handling per layer
