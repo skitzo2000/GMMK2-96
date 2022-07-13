@@ -9,7 +9,7 @@ void set_glorious_side_96(char glorious_side, uint8_t r, uint8_t g, uint8_t b){
     int* this_side;
     if(glorious_side == 'l'){this_side = side1;}
     else {this_side = side2;}
-    for(int i = 0; i < 9; i++ ){
+    for(int i = 0; i <= 9; i++ ){
         rgb_matrix_set_color(this_side[i], rgb[0], rgb[1], rgb[2]);
     }
 }
