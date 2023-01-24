@@ -112,7 +112,7 @@ enum LEDLAYER {
     L3 = 0x8,
 };
 
-uint32_t layer_state_set_user(uint32_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
     if ((state & L3) == L3) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE);
     }
