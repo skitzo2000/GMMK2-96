@@ -170,7 +170,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 //  119, LED 19
 //  120, LED 20
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
         RGB_MATRIX_INDICATOR_SET_COLOR(54, 255, 255, 255); //capslock key
