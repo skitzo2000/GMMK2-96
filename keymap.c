@@ -214,7 +214,6 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             //rgb_matrix_set_color_all(238, 65, 23);
             //RGB_MATRIX_INDICATOR_SET_COLOR(0, 255, 0, 255);   //Set Color per key
     }
-    return false;
 }
 
 void keyboard_post_init_user(void) {
