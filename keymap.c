@@ -171,10 +171,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 //  120, LED 20
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-
-    if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
-        RGB_MATRIX_INDICATOR_SET_COLOR(54, 255, 255, 255); //capslock key
+//Thanks Sheep!!!!!
+//Caps Lock Indicator
+    if (host_keyboard_led_state().caps_lock) {
+        RGB_MATRIX_INDICATOR_SET_COLOR(54, 255, 0, 0); // Assuming Caps Lock is at LED #54
+    } else {
+        RGB_MATRIX_INDICATOR_SET_COLOR(54, 0, 0, 0);
     }
+//Num Key Inidicator
+    if (host_keyboard_led_state().num_lock) {
+        RGB_MATRIX_INDICATOR_SET_COLOR(32, 255, 0, 0); // Assuming Num Lock is at LED #32
+    } else {
+        RGB_MATRIX_INDICATOR_SET_COLOR(32, 0, 0, 0);
+    }
+
+
 
     switch(get_highest_layer(layer_state)){  // special handling per layer
         case 0:  //Layer 0
